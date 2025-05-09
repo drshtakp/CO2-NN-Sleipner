@@ -38,7 +38,7 @@ CO2-NN-Sleipner/
 ├── labeling.py
 └── README.md # You're here!
 
-## 📊 Results
+## Results
 
 The trained model achieves consistent CO₂ plume segmentation across multiple years. Below are example predictions versus labels on 2010 data:
 
