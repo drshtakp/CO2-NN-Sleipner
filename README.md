@@ -51,7 +51,7 @@ Jupyter + PyTorch for open-source tools
 ## Contact:
 Feel free to reach out:
 GitHub: @drshtakp
-Email: Pated2126@gmail.com
+Email: pated2126@gmail.com
 
 ---
 
