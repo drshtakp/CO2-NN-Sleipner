@@ -1,0 +1,14 @@
+﻿# Python & Jupyter
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+*.dat
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
