@@ -38,6 +38,16 @@ CO2-NN-Sleipner/
 ├── labeling.py
 └── README.md # You're here!
 
+## 📊 Results
+
+The trained model achieves consistent CO₂ plume segmentation across multiple years. Below are example predictions versus labels on 2010 data:
+
+| Baseline vs Timelapse | Human-Labeled CO₂ Mask | NN Predicted CO₂ Mask |
+|-----------------------|------------------------|------------------------|
+| 94p10 vs 10p10        | ![Label](figures/Results.png) | ![Prediction](figures/Results.png) |
+
+> The prediction closely matches the labeled plume boundaries in the top sand wedge layer, showing high spatial resolution and continuity.
+
 ## Citation:
 Li, B., & Li, Y. E. (2021). Neural network-based CO₂ interpretation from 4D Sleipner seismic images. Journal of Geophysical Research: Solid Earth, 126(12), e2021JB022524. https://doi.org/10.1029/2021JB022524
 
