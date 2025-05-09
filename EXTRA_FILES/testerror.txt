@@ -1,0 +1,37 @@
+eps = 1e-5
+hNi,hNx,hNt = Ni//2,Nx//2,Nt//2
+# sample the patches iteratively
+hNi1 = Ni-hNi
+hNx1 = Nx-hNx
+hNt1 = Nt-hNt
+patch_info = []
+c = 0
+for Is,Xs,Ts in product(Isample,Xsample,Tsample):
+    # slice the data
+    R0 = d0[Is-hNi:Is+hNi1,Xs-hNx:Xs+hNx1,Ts-hNt:Ts+hNt1]
+    Rt = dt[Is-hNi:Is+hNi1,Xs-hNx:Xs+hNx1,Ts-hNt:Ts+hNt1]
+    # slice the mask
+    M = np.array(masks[Is-hNi:Is+hNi1,Xs-hNx:Xs+hNx1,Ts-hNt:Ts+hNt1],dtype=np.float32)
+    M = RS.resize(torch.tensor(M).unsqueeze(0).unsqueeze(0),NP=True) # 5D: (N=1,C=1,D=128,H=128,W=128)
+    M.tofile(f'{outpath}/Mask_{c}.dat')
+    # normalize R0 and Rt respectively
+    Rm0,Rs0 = np.mean(R0),np.std(R0)
+    Rmt,Rst = np.mean(Rt),np.std(Rt)
+    R0 = (R0-Rm0)/(Rs0+eps)
+    Rt = (Rt-Rmt)/(Rst+eps)
+    # stack R0 and Rt
+    R0t = torch.tensor(np.stack((R0,Rt))).unsqueeze(0)
+    R0t = RS.resize(R0t,NP=True) # 5D: (N=1,C=2,D=64,H=64,W=64)
+    # save the patches and corresponding masks to outpath
+    R0t.tofile(f'{outpath}/R0t_{c}.dat')
+    # record the patch information in patch_info dict
+    pf = OrderedDict()
+    pf['Ptch_id'] = c
+    pf['Mask_id'] = c
+    pf['ct'] = [Is,Xs,Ts]
+    pf['mean'] = [Rm0,Rmt]
+    pf['std'] = [Rs0,Rst]
+    patch_info.append(pf)
+    c += 1
+# save the patch info
+pd.DataFrame.from_dict(patch_info, orient='columns').to_csv(f'{outpath}/patch_info.csv')
