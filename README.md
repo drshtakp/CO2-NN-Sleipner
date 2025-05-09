@@ -42,7 +42,7 @@ CO2-NN-Sleipner/
 
 The trained model achieves consistent CO₂ plume segmentation across multiple years. Below are example predictions versus labels on 2010 data:
 
-| Baseline vs Timelapse | Human-Labeled CO₂ Mask | NN Predicted CO₂ Mask |
+| Baseline vs Timelapse | Human-Labeled CO₂ Mask(Panel C) | NN Predicted CO₂ Mask(Panel D) |
 |-----------------------|------------------------|------------------------|
 | 94p10 vs 10p10        | ![Label](figures/Results.png) | ![Prediction](figures/Results.png) |
 
